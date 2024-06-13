@@ -1,20 +1,23 @@
 import asyncio
-import aiogram
-from aiogram import Bot, Dispatcher
-from aiogram.filters import CommandStart
-from aiogram.types import Message
+import logging
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters.command import Command
 
-TOKEN = ("7281434100:AAFHmMLCWjiCOAdwxTiGAB6qJczWPIemwhM")
+# Включаем логирование, чтобы не пропустить важные сообщения
+logging.basicConfig(level=logging.INFO)
+# Объект бота
+bot = Bot(token="7161874537:AAHwF1GJ_CfHu51peu3aDbSe3RFsOKvZFaw")
+# Диспетчер
 dp = Dispatcher()
 
-# Обработчик команды /start
-@dp.message_handler(commands=['start'])
-async def command_start_handler(message: Message):
-    await message.answer("Привет! Я бот, который может отправить тебе текущую погоду. "
-                         "Нажми кнопку ниже, чтобы отправить мне свою геопозицию и узнать погоду в этом месте.")
+# Хэндлер на команду /start
+@dp.message(Command("start"))
+async def cmd_start(message: types.Message):
+    await message.answer("Hello!")
 
+# Запуск процесса поллинга новых апдейтов
 async def main():
-    await dp.start_polling(skip_updates=True)
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
     asyncio.run(main())
