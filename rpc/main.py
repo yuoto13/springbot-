@@ -6,14 +6,15 @@ from aiogram.filters.command import Command
 # Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(level=logging.INFO)
 # Объект бота
-bot = Bot(token="7161874537:AAHwF1GJ_CfHu51peu3aDbSe3RFsOKvZFaw")
+bot = Bot(token="7281434100:AAFHmMLCWjiCOAdwxTiGAB6qJczWPIemwhM")
 # Диспетчер
 dp = Dispatcher()
 
 # Хэндлер на команду /start
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Hello!")
+    await message.answer("Привет! Я бот, который может отправить тебе текущую погоду. "
+                         "Нажми кнопку ниже, чтобы отправить мне свою геопозицию и узнать погоду в этом месте.")
 
 # Запуск процесса поллинга новых апдейтов
 async def main():
